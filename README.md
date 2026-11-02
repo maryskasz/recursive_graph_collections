@@ -35,11 +35,11 @@ The library has a C-compatible interface. All functions validate their inputs sa
 
 ### 4. Replacing Edge
 - `bool rgc_replace_edge(long id, char const *result_name, char const *recipient_name, int w_1, int w_2, char const *donor_name, int v_1, int v_2);`  
-  Creates a new graph (`result_name`) in four steps:
-  1. Copies the `recipient_name` graph.
-  2. Deletes the edge `{w_1, w_2}` from the new graph.
-  3. Identifies vertices `v_1` as `w_1` and `v_2` as `w_2` and adds remaining donor vertices (assigning them the smallest available non-negative IDs).
-  4. Adds all donor edges with a new level equal to `max(donor graph level, replaced edge level) + 1` (replaced_edge - edge {w_1, w_2}).
+  Creates a new graph (`result_name`) in following steps:
+  ** Copies the `recipient_name` graph.
+  ** Deletes the edge `{w_1, w_2}` from the new graph.
+  ** Identifies vertices `v_1` as `w_1` and `v_2` as `w_2` and adds remaining donor vertices (assigning them the smallest available non-negative IDs).
+  ** Adds all donor edges with a new level equal to `max(donor graph level, replaced edge level) + 1` (replaced_edge - edge {w_1, w_2}).
 
 ## How to Compile & Link
 
