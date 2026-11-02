@@ -503,12 +503,7 @@ namespace cxx {
 		}
 		auto &collection = collection_it->second;
 
-		auto graph_it = collection.find(name);
-		if (graph_it == collection.end()) {
-			return nullptr;
-		}
-
-		++graph_it;
+		auto graph_it = collection.upper_bound(name);
 
 		if (graph_it == collection.end()) {
 			return nullptr;
