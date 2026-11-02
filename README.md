@@ -8,8 +8,6 @@ Compatible with C and based on STL containers and safe usage of iterators and st
 * **Maria Kaszewska**
 * **Julia Szoszkiewicz**
 
----
-
 ## API
 
 The library has a C-compatible interface. All functions validate their inputs safely by returning `-1`, `false`, or `nullptr` when given data is invalid.
