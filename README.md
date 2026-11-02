@@ -1,7 +1,5 @@
 # Recursive Graph Collections
-
-## What is this?
-This is a C++23 library that lets you create and manage collections of **recursive graphs** written as part of an Advanced C++ course at MIMUW.
+It is a C++23 library that lets you create and manage collections of **recursive graphs** written as part of an Advanced C++ course at MIMUW.
 
 Compatible with C and based on STL containers and safe usage of iterators and static variables.
 
