@@ -42,7 +42,7 @@ namespace {
 	// Graph data holds all graph information. The first Nodes_Set contains
 	// a graph's currently used nodes, and the second Nodes_Set contains a
 	// graph's deleted nodes, so that the sum of the two nodes sets is {0, ...,
-	// N-1} where N-1 is the largest node number to have ever been in the graph.
+	// N-1} where N-1 is the largest node number currently in the graph.
 	using Graph_Data = std::tuple<Nodes_Set, Edge_Map, Levels_Map, Nodes_Set>;
 
 	// Map of graph names as keys and graph data as values.
@@ -377,7 +377,7 @@ namespace cxx {
 		int new_node = 0;
 		if (free_nodes.empty()) {
 			new_node = nodes.size();
-			nodes.insert(nodes.end(), new_node); // <- zmiana
+			nodes.insert(nodes.end(), new_node);
 		}
 		else {
 			auto new_node_it = free_nodes.begin();
@@ -385,7 +385,7 @@ namespace cxx {
 			nodes.insert(new_node);
 			free_nodes.erase(new_node_it);
 		}
-		// nodes.insert(new_node);
+
 		return new_node;
 	}
 
@@ -407,8 +407,21 @@ namespace cxx {
 		}
 		nodes.erase(x_it);
 
-		// Node number x is free, so it goes to the set of available nodes.
-		free_nodes.insert(x);
+		// Node number x is free and if its number is less than graph's maximum,
+		// it goes to the set of available nodes.
+		auto max_node_it = nodes.rbegin();
+		int max_node = 0;
+		if (max_node_it != nodes.rend()) {
+			max_node = *max_node_it;
+		}
+
+		if (max_node > x) {
+			free_nodes.insert(x);
+		}
+
+		// We need to delete all free_nodes which are greater than current max.
+		auto max_to_delete_it = free_nodes.upper_bound(max_node);
+		free_nodes.erase(max_to_delete_it, free_nodes.end());
 
 		// Erasing edges adjacent to x.
 		std::vector<int> nodes_adjacent_to_x;
